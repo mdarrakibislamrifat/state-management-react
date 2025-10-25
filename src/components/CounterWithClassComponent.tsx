@@ -3,7 +3,7 @@ import React from "react";
 
 class CounterWithClassComponent extends React.Component<{}, { count: number }> {
     constructor(props: {}) {
-        super(props); // pass props to super
+        super(props);
         this.state = { count: 0 };
     }
 

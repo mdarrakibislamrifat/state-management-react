@@ -1,3 +1,4 @@
+import ChildComponent from "./ChildComponent";
 
 type Tprops = {
     count: number;
@@ -14,6 +15,7 @@ const CounterWithFunctionalComponent = ({ count, setCount }: Tprops) => {
             >
                 {count}
             </button>
+            <ChildComponent count={count} />
         </div>
     );
 };
