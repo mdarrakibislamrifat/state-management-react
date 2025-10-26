@@ -1,22 +1,30 @@
-import { useReducer } from "react"
+import { useReducer, type ChangeEvent } from "react"
 
+type Taction = {
+    type: string;
+    payload: string
+}
 
 const initialState = {
     name: "",
     age: "",
-    hobbies: []
+    hobbies: [] as string[]
 }
 
 
-const reducer = (currentState, action) => {
+const reducer = (currentState: typeof initialState, action: Taction) => {
 
     switch (action.type) {
         case "addName":
             return {
-                ...currentState, name: "Programming"
-            }
+                ...currentState, name: action.payload
+            };
+        case "addAge":
+            return { ...currentState, age: action.payload };
+        case "addHobbies":
+            return { ...currentState, hobbies: [...currentState.hobbies, action.payload] };
         default:
-            break;
+            return currentState;
     }
 
 }
@@ -25,16 +33,18 @@ const reducer = (currentState, action) => {
 const UserInfoWithUseReducer = () => {
 
     const [state, dispatch] = useReducer(reducer, initialState);
-    console.log(state);
 
-
+    const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(state);
+    }
 
 
 
     return (
-        <form>
+        <form onSubmit={handleSubmit}>
             <input
-                onChange={() => dispatch({ type: "addName" })}
+                onChange={(e) => dispatch({ type: "addName", payload: e.target.value })}
                 className="border border-purple-500 m-10"
                 type="text"
                 name="name"
@@ -43,6 +53,7 @@ const UserInfoWithUseReducer = () => {
 
             />
             <input
+                onChange={(e) => dispatch({ type: "addAge", payload: e.target.value })}
                 className="border border-purple-500 m-10"
                 type="number"
                 name="age"
@@ -51,6 +62,7 @@ const UserInfoWithUseReducer = () => {
 
             />
             <input
+                onBlur={(e) => dispatch({ type: "addHobbies", payload: e.target.value })}
                 className="border border-purple-500 m-10"
                 type="text"
                 name="hobbies"
