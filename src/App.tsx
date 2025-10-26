@@ -4,13 +4,11 @@ import TodoProvider from "./context/TodoProvider";
 
 
 
+
 function App() {
   return (
     <TodoProvider>
-
       <TodoForm />
-
-
     </TodoProvider>
 
   );

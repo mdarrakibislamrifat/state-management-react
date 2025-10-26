@@ -6,10 +6,8 @@ const TodoForm = () => {
     const { todoTitle } = useContext(TodoContext);
     console.log(todoTitle);
     return (
-        <div>
-            <h1>This is a Todo Form component</h1>
-        </div>
+        <div>This is todoform component</div>
     )
 }
 
-export default TodoForm
+export default TodoForm;
