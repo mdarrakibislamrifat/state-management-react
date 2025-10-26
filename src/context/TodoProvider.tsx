@@ -13,20 +13,24 @@ type TTodo = {
 }
 
 type TAction = {
-    type: string
+    type: "addTodo" | "taskComplete"
     payload: TTodo | string
 }
 
 
 export const TodoContext = createContext<{ state: TTodo[]; dispatch: React.Dispatch<TAction> } | undefined>(undefined);
 
+const typeConstants = {
+    ADD_TODO: "addTodo",
+    TASK_COMPLETE: "taskComplete"
+}
 const initialState: TTodo[] = [];
 
 const reducer = (currentState: TTodo[], action: TAction) => {
     switch (action.type) {
-        case "addTodo":
+        case typeConstants.ADD_TODO:
             return [...currentState, action.payload]
-        case "taskComplete":
+        case typeConstants.TASK_COMPLETE:
             return currentState.map((item) => item.id === action.payload ? { ...item, isCompleted: !item.isCompleted } : item);
         default:
             return currentState
