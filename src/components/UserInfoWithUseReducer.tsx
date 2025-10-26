@@ -1,17 +1,46 @@
-import { use, useState } from "react";
+import { useReducer } from "react"
 
-const UserInfoWithUseState = () => {
-    const [user, setUser] = useState({ name: "", age: "0", hobbies: [] });
+
+const initialState = {
+    name: "",
+    age: "",
+    hobbies: []
+}
+
+
+const reducer = (currentState, action) => {
+
+    switch (action.type) {
+        case "addName":
+            return {
+                ...currentState, name: "Programming"
+            }
+        default:
+            break;
+    }
+
+}
+
+
+const UserInfoWithUseReducer = () => {
+
+    const [state, dispatch] = useReducer(reducer, initialState);
+    console.log(state);
+
+
+
+
 
     return (
         <form>
             <input
+                onChange={() => dispatch({ type: "addName" })}
                 className="border border-purple-500 m-10"
                 type="text"
                 name="name"
                 id="name"
                 placeholder="Name"
-                onChange={(e) => setUser({ ...user, name: e.target.value })}
+
             />
             <input
                 className="border border-purple-500 m-10"
@@ -19,7 +48,7 @@ const UserInfoWithUseState = () => {
                 name="age"
                 id="age"
                 placeholder="Age"
-                onChange={(e) => setUser({ ...user, age: e.target.value })}
+
             />
             <input
                 className="border border-purple-500 m-10"
@@ -27,13 +56,13 @@ const UserInfoWithUseState = () => {
                 name="hobbies"
                 id="hobbies"
                 placeholder="Hobby"
-                onBlur={(e) => setUser({ ...user, hobbies: [...user.hobbies, e.target.value] })}
+
             />
             <button className="btn btn-primary" type="submit">
                 Submit
             </button>
         </form>
-    );
-};
+    )
+}
 
-export default UserInfoWithUseState;
+export default UserInfoWithUseReducer

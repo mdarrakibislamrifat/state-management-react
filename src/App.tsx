@@ -1,10 +1,12 @@
 import "./App.css";
-import UserInfoWithUseState from "./components/UserInfoWithUseState";
+import UserInfoWithUseReducer from "./components/UserInfoWithUseReducer";
+
 
 function App() {
   return (
     <div className="m-10 p-10 border border-red-500">
-      <UserInfoWithUseState />
+      <UserInfoWithUseReducer />
+
     </div>
   );
 }
